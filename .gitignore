@@ -1,0 +1,51 @@
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimizados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Base de datos y datos de usuario locales
+*.db
+*.sqlite
+*.sqlite3
+datos_usuario/
+*.flag
+vigilante_stop.flag
+
+# Archivos de configuración con secretos locales (si existieran en raíz)
+*.env
+*.env.local
+
+# Salidas de compilación y empaquetado
+build/
+dist/
+*.egg-info/
+*.spec
+
+# Logs
+*.log
+logs/
+
+# Carpetas de editores e IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Gráficas generadas temporales
+graficas_generadas/
+LeeYJuega.egg-info/
