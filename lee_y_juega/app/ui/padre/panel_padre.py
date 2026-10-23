@@ -319,7 +319,27 @@ class PanelPadre(QDialog):
         l_tiempo.addWidget(btn_menos_30)
         layout.addWidget(grupo_tiempo)
 
-        # 3. Mantenimiento y Respaldos
+        # 3. Entrenamiento Saber 7.° y Cuadernillos Imprimibles
+        grupo_saber = QGroupBox("Entrenamiento Formal ICFES Saber 7.°")
+        l_saber = QHBoxLayout(grupo_saber)
+
+        btn_simulacro = QPushButton("📝 Realizar Mini-Simulacro (15 Preguntas)")
+        btn_simulacro.clicked.connect(self._iniciar_simulacro_saber)
+
+        btn_cuadernillo = QPushButton("🖨️ Imprimir Cuadernillo con Hoja de Burbujas")
+        btn_cuadernillo.setObjectName("btn_secundario")
+        btn_cuadernillo.clicked.connect(self._imprimir_cuadernillo_aleatorio)
+
+        btn_ver_logros = QPushButton("🏆 Ver Medallas e Insignias")
+        btn_ver_logros.setObjectName("btn_secundario")
+        btn_ver_logros.clicked.connect(self._ver_logros)
+
+        l_saber.addWidget(btn_simulacro)
+        l_saber.addWidget(btn_cuadernillo)
+        l_saber.addWidget(btn_ver_logros)
+        layout.addWidget(grupo_saber)
+
+        # 4. Mantenimiento y Respaldos
         grupo_mant = QGroupBox("Mantenimiento y Respaldo")
         l_mant = QHBoxLayout(grupo_mant)
 
@@ -365,3 +385,35 @@ class PanelPadre(QDialog):
         if r == QMessageBox.Yes:
             self.repo.registrar_cambio_nivel(1, "Reinicio manual por el padre")
             QMessageBox.information(self, "Reinicio", "Nivel reiniciado a 1.")
+
+    def _iniciar_simulacro_saber(self) -> None:
+        from ...lectura.fuentes import GestorFuentesLectura
+        from ...lectura.simulacro import GestorSimulacro
+        from ..dialogo_simulacro import DialogoSimulacroICFES
+
+        fuentes = GestorFuentesLectura()
+        gestor_sim = GestorSimulacro(fuentes, self.repo)
+        dlg = DialogoSimulacroICFES(gestor_sim, self)
+        dlg.exec()
+
+    def _imprimir_cuadernillo_aleatorio(self) -> None:
+        import webbrowser
+        from ...lectura.fuentes import GestorFuentesLectura
+        from ...lectura.generador_imprimible import GeneradorImprimibleICFES
+
+        fuentes = GestorFuentesLectura()
+        lectura = fuentes.lecturas_offline[0]  # O primera lectura
+        preguntas = lectura.get("preguntas", [])
+        ruta_html = GeneradorImprimibleICFES.generar_cuadernillo_html(lectura, preguntas)
+        webbrowser.open(ruta_html.as_uri())
+        QMessageBox.information(
+            self,
+            "Cuadernillo Imprimible",
+            "Se ha abierto el cuadernillo oficial en tu navegador con su hoja de respuestas.\n\nPresiona Ctrl + P para imprimirlo o guardarlo en PDF."
+        )
+
+    def _ver_logros(self) -> None:
+        from ..componentes_ludicos import DialogoLogros
+        dlg = DialogoLogros(self.repo, self)
+        dlg.exec()
+

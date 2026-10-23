@@ -34,6 +34,8 @@ class FiltroAdecuacionYLimpieza:
         texto = re.sub(r"\[\d+\]", "", texto)
         texto = re.sub(r"\[editar\]", "", texto, flags=re.IGNORECASE)
         texto = re.sub(r"\{\{[^}]+\}\}", "", texto)
+        texto = re.sub(r"\s+([.,;:!?])", r"\1", texto)
+        texto = re.sub(r"[ \t]+", " ", texto)
 
         # Normalizar espacios en blanco y saltos de línea repetidos
         lineas = [l.strip() for l in texto.splitlines() if l.strip()]

@@ -24,6 +24,7 @@ def test_repositorio_banco_tiempo():
         descontado = repo.descontar_minutos(15.0)
         assert descontado == 45.0
         assert repo.obtener_balance_actual() == 45.0
+        repo.cerrar()
 
 
 def test_repositorio_niveles():
@@ -36,6 +37,7 @@ def test_repositorio_niveles():
 
         repo.registrar_cambio_nivel(2, "Test aprobados con honores")
         assert repo.obtener_nivel_actual() == 2
+        repo.cerrar()
 
 
 def test_repositorio_lecciones_progreso():
@@ -46,3 +48,4 @@ def test_repositorio_lecciones_progreso():
         assert repo.ha_completado_leccion("literal") is False
         repo.marcar_leccion_completada("literal")
         assert repo.ha_completado_leccion("literal") is True
+        repo.cerrar()

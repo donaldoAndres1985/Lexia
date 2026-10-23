@@ -38,6 +38,9 @@
 * 📦 **Banco Offline de +40 Lecturas Curadas:** Funciona de forma autónoma sin depender de internet. Incluye textos literarios (fábulas, mitos muiscas y narraciones colombianas), textos informativos científicos y textos discontinuos (gráficas y tablas con Matplotlib).
 * ✨ **Generación Inteligente con Gemini (Opcional):** Si el padre ingresa una clave gratuita de la API de Gemini, la aplicación genera lecturas y cuestionarios en tiempo real adaptados a 7.º grado, guardando la clave cifrada con **DPAPI de Windows**.
 * 📈 **Dificultad Adaptativa (Niveles 1 al 6):** El sistema sube de nivel al consolidar rachas aprobadas con honores y disminuye la dificultad de forma empática si la estudiante requiere refuerzo, evitando la frustración.
+* 🦉 **Gamificación y Koko el Colibrí:** Medallas coleccionables (*Ojo de Halcón*, *Guardiana de Mitos*, *Cerebro Crítico*), compañero virtual con experiencia/niveles y **Ruleta de Bonificación** al lograr el 100% de aciertos.
+* 🖍️ **Herramientas de Lectura Activa:** Subrayador digital multicolor (amarillo, verde, azul), selector de temas visuales (Blanco, Sepia cálido, Noche), **Diccionario Contextual al doble clic** y **Narrador en voz alta (Text-to-Speech)** nativo y offline.
+* 📝 **Simulacros y Cuadernillos Imprimibles:** Mini-simulacros Saber 7.° (15 preguntas con cronómetro de 25 min) y generador de cuadernillos imprimibles con **hoja oficial de burbujas** para practicar con lápiz N.° 2.
 * 🔐 **Modo Padre con Argon2:** Panel administrativo protegido por hash criptográfico seguro para consultar estadísticas semanales, ajustar minutos manualmente, editar listas de aplicaciones y exportar reportes a CSV.
 
 ---

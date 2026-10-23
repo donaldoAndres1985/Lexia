@@ -33,6 +33,8 @@ def test_recompensa_lectura():
         nuevo_saldo = banco.agregar_recompensa_lectura()
         assert nuevo_saldo == 90.0
         assert banco.minutos_disponibles == 90.0
+        banco._timer_consumo.stop()
+        repo.cerrar()
 
 
 def test_ajuste_manual():
@@ -46,3 +48,5 @@ def test_ajuste_manual():
 
         banco.ajustar_manualmente(-10.0)
         assert banco.minutos_disponibles == 40.0
+        banco._timer_consumo.stop()
+        repo.cerrar()

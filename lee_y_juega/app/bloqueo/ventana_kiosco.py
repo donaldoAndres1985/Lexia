@@ -33,11 +33,21 @@ from ..datos.repositorio import RepositorioDatos
 from ..lectura.calificacion import EvaluadorTest
 from ..lectura.dificultad import GestorDificultadAdaptativa
 from ..lectura.generador_preguntas import GeneradorPreguntas
+from ..lectura.generador_imprimible import GeneradorImprimibleICFES
+from ..lectura.narrador_audio import NarradorAudio
 from ..lectura.seleccion import SelectorLectura
+from ..pedagogia.gamificacion import GestorGamificacion
 from ..pedagogia.lecciones import GestorLecciones
 from ..pedagogia.tutor import TutorPedagogico
+from ..ui.componentes_ludicos import (
+    DialogoDiccionario,
+    DialogoLogros,
+    DialogoRuletaBonificacion,
+    WidgetMascota,
+)
 from ..ui.padre.login import DialogoLoginPadre
 from ..ui.padre.panel_padre import PanelPadre
+from ..ui.visor_lectura import VisorLecturaInteractiva
 
 logger = logging.getLogger(__name__)
 
@@ -66,6 +76,8 @@ class VentanaKiosco(QWidget):
         self.generador = generador_preguntas
         self.lecciones = gestor_lecciones
         self.dificultad = GestorDificultadAdaptativa(repositorio, configuracion)
+        self.gamificacion = GestorGamificacion(repositorio)
+        self.narrador = NarradorAudio(self)
 
         self._permitir_cierre = False
         self._lectura_actual: Optional[Dict[str, Any]] = None
@@ -106,6 +118,12 @@ class VentanaKiosco(QWidget):
         layout_barra.addWidget(self.lbl_estado_nivel)
 
         layout_barra.addStretch()
+
+        self.btn_logros = QPushButton("🏆 Mis Medallas")
+        self.btn_logros.setObjectName("btn_secundario")
+        self.btn_logros.setStyleSheet("font-size: 12px; padding: 5px 10px;")
+        self.btn_logros.clicked.connect(self._abrir_logros)
+        layout_barra.addWidget(self.btn_logros)
 
         self.btn_modo_padre = QPushButton("🔐 Modo Padre")
         self.btn_modo_padre.setObjectName("btn_padre")
@@ -159,6 +177,10 @@ class VentanaKiosco(QWidget):
         self.lbl_motivo.setWordWrap(True)
         self.lbl_motivo.setStyleSheet("font-size: 16px; line-height: 1.5; color: #334155;")
         l_tarjeta.addWidget(self.lbl_motivo)
+
+        # Mascota Virtual Acompañante
+        self.widget_mascota = WidgetMascota(self.repo)
+        l_tarjeta.addWidget(self.widget_mascota)
 
         # Tarjeta pequeña de métricas
         tarjeta_resumen = QFrame()
@@ -263,6 +285,82 @@ class VentanaKiosco(QWidget):
         self.lbl_fuente.setStyleSheet("color: #64748B; font-size: 12px;")
         layout.addWidget(self.lbl_fuente)
 
+        # Barra de herramientas de lectura activa
+        barra_herramientas = QHBoxLayout()
+        barra_herramientas.setSpacing(8)
+
+        lbl_subrayar = QLabel("🖍️ Subrayar:")
+        lbl_subrayar.setStyleSheet("font-size: 12px; font-weight: bold; color: #475569;")
+        barra_herramientas.addWidget(lbl_subrayar)
+
+        btn_res_amarillo = QPushButton("🟡")
+        btn_res_amarillo.setFixedSize(30, 28)
+        btn_res_amarillo.setToolTip("Resaltar en amarillo (ideas clave)")
+        btn_res_amarillo.clicked.connect(lambda: self.visor_texto.resaltar_seleccion("#FEF08A"))
+        barra_herramientas.addWidget(btn_res_amarillo)
+
+        btn_res_verde = QPushButton("🟢")
+        btn_res_verde.setFixedSize(30, 28)
+        btn_res_verde.setToolTip("Resaltar en verde (hechos y pistas)")
+        btn_res_verde.clicked.connect(lambda: self.visor_texto.resaltar_seleccion("#BBF7D0"))
+        barra_herramientas.addWidget(btn_res_verde)
+
+        btn_res_azul = QPushButton("🔵")
+        btn_res_azul.setFixedSize(30, 28)
+        btn_res_azul.setToolTip("Resaltar en celeste (vocabulario)")
+        btn_res_azul.clicked.connect(lambda: self.visor_texto.resaltar_seleccion("#BAE6FD"))
+        barra_herramientas.addWidget(btn_res_azul)
+
+        btn_res_limpiar = QPushButton("🧹")
+        btn_res_limpiar.setFixedSize(30, 28)
+        btn_res_limpiar.setToolTip("Quitar resaltado del texto seleccionado")
+        btn_res_limpiar.clicked.connect(lambda: self.visor_texto.resaltar_seleccion("limpiar"))
+        barra_herramientas.addWidget(btn_res_limpiar)
+
+        barra_herramientas.addSpacing(15)
+
+        # Modos visuales
+        lbl_modos = QLabel("🎨 Tema:")
+        lbl_modos.setStyleSheet("font-size: 12px; font-weight: bold; color: #475569;")
+        barra_herramientas.addWidget(lbl_modos)
+
+        btn_modo_blanco = QPushButton("Blanco")
+        btn_modo_blanco.setObjectName("btn_secundario")
+        btn_modo_blanco.setFixedHeight(28)
+        btn_modo_blanco.clicked.connect(lambda: self.visor_texto.aplicar_modo_visual("blanco"))
+        barra_herramientas.addWidget(btn_modo_blanco)
+
+        btn_modo_sepia = QPushButton("Sepia 📜")
+        btn_modo_sepia.setObjectName("btn_secundario")
+        btn_modo_sepia.setFixedHeight(28)
+        btn_modo_sepia.clicked.connect(lambda: self.visor_texto.aplicar_modo_visual("sepia"))
+        barra_herramientas.addWidget(btn_modo_sepia)
+
+        btn_modo_noche = QPushButton("Noche 🌙")
+        btn_modo_noche.setObjectName("btn_secundario")
+        btn_modo_noche.setFixedHeight(28)
+        btn_modo_noche.clicked.connect(lambda: self.visor_texto.aplicar_modo_visual("noche"))
+        barra_herramientas.addWidget(btn_modo_noche)
+
+        barra_herramientas.addStretch()
+
+        # Botón Audio Text-to-Speech
+        self.btn_audio = QPushButton("🎧 Escuchar Lectura")
+        self.btn_audio.setObjectName("btn_secundario")
+        self.btn_audio.setFixedHeight(30)
+        self.btn_audio.clicked.connect(self._alternar_audio_lectura)
+        self.narrador.estado_cambiado.connect(self._al_cambiar_estado_audio)
+        barra_herramientas.addWidget(self.btn_audio)
+
+        # Botón Cuadernillo Imprimible
+        self.btn_imprimir = QPushButton("🖨️ Imprimir Cuadernillo")
+        self.btn_imprimir.setObjectName("btn_secundario")
+        self.btn_imprimir.setFixedHeight(30)
+        self.btn_imprimir.clicked.connect(self._generar_cuadernillo_imprimible)
+        barra_herramientas.addWidget(self.btn_imprimir)
+
+        layout.addLayout(barra_herramientas)
+
         # Área de scroll para el texto
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
@@ -278,10 +376,10 @@ class VentanaKiosco(QWidget):
         self.lbl_imagen_discontinua.setVisible(False)
         self.l_texto.addWidget(self.lbl_imagen_discontinua)
 
-        self.lbl_cuerpo_texto = QLabel()
-        self.lbl_cuerpo_texto.setWordWrap(True)
-        self.lbl_cuerpo_texto.setStyleSheet("font-size: 17px; line-height: 1.6; color: #1E293B;")
-        self.l_texto.addWidget(self.lbl_cuerpo_texto)
+        # Visor enriquecido con subrayador y diccionario
+        self.visor_texto = VisorLecturaInteractiva()
+        self.visor_texto.palabra_consultada.connect(self._abrir_diccionario)
+        self.l_texto.addWidget(self.visor_texto)
 
         scroll.setWidget(self.contenedor_texto)
         layout.addWidget(scroll)
@@ -514,7 +612,7 @@ class VentanaKiosco(QWidget):
             self.lbl_imagen_discontinua.setVisible(False)
 
         texto_mostrar = self._lectura_actual.get("texto", "") or self._lectura_actual.get("texto_contexto", "")
-        self.lbl_cuerpo_texto.setText(texto_mostrar)
+        self.visor_texto.setText(texto_mostrar)
 
         # Reiniciar cronómetro
         self._tiempo_inicio_lectura = time.time()
@@ -531,6 +629,7 @@ class VentanaKiosco(QWidget):
     def _mostrar_test(self) -> None:
         """Pasa de la lectura a la vista 3 del test interactivo."""
         self._timer_lectura.stop()
+        self.narrador.detener()
         self._respuestas_usuario = [None] * len(self._preguntas_actuales)
         self._indice_pregunta = 0
         self.progreso_test.setMaximum(len(self._preguntas_actuales))
@@ -670,6 +769,32 @@ class VentanaKiosco(QWidget):
         if mensaje_nivel:
             resumen_tutor += f"<br><br><b>Nivel adaptativo:</b> {mensaje_nivel}"
 
+        # Actualizar mascota y gamificación
+        racha = self.repo.calcular_racha_dias()
+        nuevos_logros = self.gamificacion.evaluar_logros_tras_test(
+            resultado, self._lectura_actual.get("nivel", 1), racha
+        )
+        self.gamificacion.actualizar_mascota(aprobado, resultado["puntaje_porcentaje"])
+        if hasattr(self, "widget_mascota"):
+            self.widget_mascota.actualizar_datos()
+
+        if nuevos_logros:
+            resumen_tutor += "<br><br><b>🏆 ¡Nuevas Medallas Desbloqueadas!</b><br>"
+            for nl in nuevos_logros:
+                resumen_tutor += f"{nl['icono']} <b>{nl['nombre']}</b>: {nl['descripcion']}<br>"
+
+        # Ruleta de bonificación al 100%
+        if resultado["puntaje_porcentaje"] >= 100.0:
+            ruleta = DialogoRuletaBonificacion(self)
+            if ruleta.exec() == QDialog.Accepted and ruleta.premio_obtenido:
+                premio = ruleta.premio_obtenido
+                if premio["tipo"] in ["tiempo", "doble"]:
+                    self.repo.sumar_minutos(premio["valor"])
+                    resumen_tutor += f"<br>🎁 <b>Bonificación de la Ruleta:</b> {premio['nombre']}<br>"
+                elif premio["tipo"] == "xp":
+                    self.repo.sumar_experiencia_mascota(premio["valor"])
+                    resumen_tutor += f"<br>⭐ <b>Bonificación de la Ruleta:</b> {premio['nombre']}<br>"
+
         # Si no aprobó, detallar cada pregunta fallida con la explicación del tutor
         if not aprobado:
             resumen_tutor += "<br><br><b>Revisión de respuestas:</b><br>"
@@ -705,10 +830,47 @@ class VentanaKiosco(QWidget):
             panel.exec()
 
     def _liberar_por_padre(self) -> None:
+        self.narrador.detener()
         self._permitir_cierre = True
         self._timer_reelevar.stop()
         self.hide()
         self.desbloqueo_padre.emit()
+
+    # --- ACCIONES LÚDICAS Y HERRAMIENTAS ACTIVAS ---
+
+    def _abrir_logros(self) -> None:
+        dlg = DialogoLogros(self.repo, self)
+        dlg.exec()
+
+    def _abrir_diccionario(self, palabra: str) -> None:
+        dlg = DialogoDiccionario(palabra, self)
+        dlg.exec()
+
+    def _alternar_audio_lectura(self) -> None:
+        texto = self._lectura_actual.get("texto", "") or self._lectura_actual.get("texto_contexto", "")
+        self.narrador.alternar(texto)
+
+    def _al_cambiar_estado_audio(self, narrando: bool) -> None:
+        if narrando:
+            self.btn_audio.setText("⏹️ Detener Narración")
+            self.btn_audio.setStyleSheet("background-color: #EF4444; color: white;")
+        else:
+            self.btn_audio.setText("🎧 Escuchar Lectura")
+            self.btn_audio.setStyleSheet("")
+
+    def _generar_cuadernillo_imprimible(self) -> None:
+        if not self._lectura_actual or not self._preguntas_actuales:
+            return
+        import webbrowser
+        ruta_html = GeneradorImprimibleICFES.generar_cuadernillo_html(
+            self._lectura_actual, self._preguntas_actuales
+        )
+        webbrowser.open(ruta_html.as_uri())
+        QMessageBox.information(
+            self,
+            "Cuadernillo Imprimible Generado",
+            "Se ha abierto el cuadernillo con hoja de burbujas en tu navegador.\n\nPresiona Ctrl + P para imprimirlo en papel o guardarlo en PDF."
+        )
 
     # --- PROTECCIÓN DE CIERRE KIOSCO ---
 

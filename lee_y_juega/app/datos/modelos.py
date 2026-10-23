@@ -98,3 +98,43 @@ class LeccionProgreso(Base):
     tipo_lectura = Column(String(32), unique=True, nullable=False)  # literal, inferencial, critico
     completada = Column(Boolean, default=False, nullable=False)
     fecha_completada = Column(DateTime, nullable=True)
+
+
+class Logro(Base):
+    """Sistema de medallas, insignias y logros para motivar el mérito."""
+    __tablename__ = "logros"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    codigo = Column(String(64), unique=True, nullable=False)
+    nombre = Column(String(128), nullable=False)
+    descripcion = Column(String(255), nullable=False)
+    icono = Column(String(16), default="🏅", nullable=False)
+    desbloqueado = Column(Boolean, default=False, nullable=False)
+    fecha_desbloqueo = Column(DateTime, nullable=True)
+
+
+class MascotaEstado(Base):
+    """Estado y evolución del compañero virtual de lectura (Koko el Colibrí)."""
+    __tablename__ = "mascota_estado"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(64), default="Koko el Colibrí", nullable=False)
+    nivel = Column(Integer, default=1, nullable=False)
+    experiencia = Column(Integer, default=0, nullable=False)
+    accesorio = Column(String(64), default="bufanda_azul", nullable=False)
+    frase_actual = Column(String(255), default="¡Hola! Estoy listo para leer contigo.", nullable=False)
+
+
+class SimulacroResultado(Base):
+    """Resultados de mini-simulacros formales tipo prueba Saber 7.°."""
+    __tablename__ = "simulacros_resultado"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    fecha = Column(DateTime, default=datetime.now, nullable=False)
+    puntaje_global = Column(Float, default=0.0, nullable=False)  # Escala 0-100
+    nivel_desempeno = Column(String(32), default="Básico", nullable=False)  # Insuficiente, Mínimo, Satisfactorio, Avanzado
+    total_preguntas = Column(Integer, default=15, nullable=False)
+    aciertos = Column(Integer, default=0, nullable=False)
+    tiempo_empleado_segundos = Column(Integer, default=0, nullable=False)
+    diagnostico_texto = Column(Text, nullable=True)
+

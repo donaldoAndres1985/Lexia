@@ -19,8 +19,11 @@ from .modelos import (
     Base,
     HistorialNivel,
     LeccionProgreso,
+    Logro,
+    MascotaEstado,
     RegistroTiempo,
     SesionLectura,
+    SimulacroResultado,
     TestResultado,
 )
 from ..config.configuracion import obtener_ruta_datos
@@ -31,18 +34,33 @@ logger = logging.getLogger(__name__)
 class RepositorioDatos:
     """Acceso centralizado a los datos locales."""
 
-    def __init__(self, ruta_db: Optional[Path] = None):
-        self.ruta_db = ruta_db or (obtener_ruta_datos() / "lee_y_juega.db")
-        self.engine = create_engine(
-            f"sqlite:///{self.ruta_db.as_posix()}",
-            connect_args={"check_same_thread": False},
-        )
+    def __init__(self, ruta_db: Optional[Path | str] = None):
+        if str(ruta_db) == ":memory:":
+            self.ruta_db = Path(":memory:")
+            self.engine = create_engine(
+                "sqlite:///:memory:",
+                connect_args={"check_same_thread": False},
+            )
+        else:
+            self.ruta_db = ruta_db or (obtener_ruta_datos() / "lee_y_juega.db")
+            self.engine = create_engine(
+                f"sqlite:///{self.ruta_db.as_posix()}",
+                connect_args={"check_same_thread": False},
+            )
         self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
         self.inicializar_base_de_datos()
 
+    def cerrar(self) -> None:
+        """Libera conexiones del engine (indispensable para Windows en tests)."""
+        try:
+            self.engine.dispose()
+        except Exception:
+            pass
+
     def inicializar_base_de_datos(self) -> None:
         """Crea las tablas si no existen e inicializa registros requeridos."""
-        self.ruta_db.parent.mkdir(parents=True, exist_ok=True)
+        if str(self.ruta_db) != ":memory:":
+            self.ruta_db.parent.mkdir(parents=True, exist_ok=True)
         Base.metadata.create_all(bind=self.engine)
         logger.info(f"Base de datos verificada en {self.ruta_db}")
 
@@ -52,6 +70,26 @@ class RepositorioDatos:
                 existente = s.query(LeccionProgreso).filter_by(tipo_lectura=tipo).first()
                 if not existente:
                     s.add(LeccionProgreso(tipo_lectura=tipo, completada=False))
+
+            # Inicializar catálogo de logros
+            logros_iniciales = [
+                ("primer_paso", "Primera Victoria", "Aprueba tu primer test de lectura completa.", "🌱"),
+                ("ojo_de_halcon", "Ojo de Halcón", "Acierta 10 preguntas literales acumuladas.", "🦅"),
+                ("lectora_de_mitos", "Guardiana de Mitos", "Lee y comprende 3 leyendas o mitos colombianos.", "✨"),
+                ("cerebro_critico", "Cerebro Crítico", "Acierta 5 preguntas de comprensión crítica.", "🧠"),
+                ("puntaje_perfecto", "Maestría Total", "Consigue un puntaje perfecto del 100% en un test.", "🌟"),
+                ("racha_imparable", "Racha Imparable", "Alcanza una racha de 5 días seguidos aprobando lecturas.", "🔥"),
+                ("amiga_de_la_ciencia", "Curiosidad Científica", "Lee 3 textos informativos de ciencias de la naturaleza.", "🔬"),
+                ("reina_del_icfes", "Experta Nivel 3+", "Avanza hasta el Nivel 3 o superior en la prueba adaptativa.", "👑"),
+            ]
+            for cod, nom, descr, ico in logros_iniciales:
+                if not s.query(Logro).filter_by(codigo=cod).first():
+                    s.add(Logro(codigo=cod, nombre=nom, descripcion=descr, icono=ico, desbloqueado=False))
+
+            # Inicializar mascota si no existe
+            if not s.query(MascotaEstado).first():
+                s.add(MascotaEstado(nombre="Koko el Colibrí", nivel=1, experiencia=0, accesorio="bufanda_azul"))
+
             s.commit()
 
     def obtener_sesion(self) -> Session:
@@ -350,3 +388,123 @@ class RepositorioDatos:
         except Exception as e:
             logger.error(f"Error al respaldar base de datos: {e}")
             return False
+
+    # --- GAMIFICACIÓN: LOGROS Y MASCOTA ---
+
+    def obtener_logros(self) -> List[Dict[str, Any]]:
+        with self.obtener_sesion() as s:
+            logros = s.query(Logro).all()
+            return [
+                {
+                    "codigo": l.codigo,
+                    "nombre": l.nombre,
+                    "descripcion": l.descripcion,
+                    "icono": l.icono,
+                    "desbloqueado": l.desbloqueado,
+                    "fecha_desbloqueo": l.fecha_desbloqueo.strftime("%d/%m/%Y") if l.fecha_desbloqueo else None,
+                }
+                for l in logros
+            ]
+
+    def desbloquear_logro(self, codigo: str) -> Optional[Dict[str, Any]]:
+        with self.obtener_sesion() as s:
+            logro = s.query(Logro).filter_by(codigo=codigo).first()
+            if logro and not logro.desbloqueado:
+                logro.desbloqueado = True
+                logro.fecha_desbloqueo = datetime.now()
+                s.commit()
+                logger.info(f"¡Logro desbloqueado! {logro.nombre}")
+                return {
+                    "codigo": logro.codigo,
+                    "nombre": logro.nombre,
+                    "descripcion": logro.descripcion,
+                    "icono": logro.icono,
+                }
+        return None
+
+    def obtener_estado_mascota(self) -> Dict[str, Any]:
+        with self.obtener_sesion() as s:
+            mascota = s.query(MascotaEstado).first()
+            if not mascota:
+                mascota = MascotaEstado(nombre="Koko el Colibrí", nivel=1, experiencia=0)
+                s.add(mascota)
+                s.commit()
+            return {
+                "nombre": mascota.nombre,
+                "nivel": mascota.nivel,
+                "experiencia": mascota.experiencia,
+                "accesorio": mascota.accesorio,
+                "frase_actual": mascota.frase_actual,
+                "xp_siguiente_nivel": mascota.nivel * 100,
+            }
+
+    def sumar_experiencia_mascota(self, xp_ganada: int, nueva_frase: Optional[str] = None) -> Dict[str, Any]:
+        with self.obtener_sesion() as s:
+            mascota = s.query(MascotaEstado).first()
+            if not mascota:
+                mascota = MascotaEstado(nombre="Koko el Colibrí", nivel=1, experiencia=0)
+                s.add(mascota)
+
+            mascota.experiencia += xp_ganada
+            subio_nivel = False
+            xp_necesaria = mascota.nivel * 100
+
+            while mascota.experiencia >= xp_necesaria:
+                mascota.experiencia -= xp_necesaria
+                mascota.nivel += 1
+                subio_nivel = True
+                xp_necesaria = mascota.nivel * 100
+
+            if nueva_frase:
+                mascota.frase_actual = nueva_frase
+
+            s.commit()
+            return {
+                "nombre": mascota.nombre,
+                "nivel": mascota.nivel,
+                "experiencia": mascota.experiencia,
+                "subio_nivel": subio_nivel,
+                "frase": mascota.frase_actual,
+            }
+
+    # --- SIMULACROS ICFES SABER 7.° ---
+
+    def guardar_simulacro_resultado(
+        self,
+        puntaje_global: float,
+        nivel_desempeno: str,
+        total_preguntas: int,
+        aciertos: int,
+        tiempo_empleado_segundos: int,
+        diagnostico_texto: str,
+    ) -> int:
+        with self.obtener_sesion() as s:
+            sim = SimulacroResultado(
+                puntaje_global=puntaje_global,
+                nivel_desempeno=nivel_desempeno,
+                total_preguntas=total_preguntas,
+                aciertos=aciertos,
+                tiempo_empleado_segundos=tiempo_empleado_segundos,
+                diagnostico_texto=diagnostico_texto,
+            )
+            s.add(sim)
+            s.commit()
+            return int(sim.id)
+
+    def obtener_ultimos_simulacros(self, limite: int = 5) -> List[Dict[str, Any]]:
+        with self.obtener_sesion() as s:
+            sims = s.query(SimulacroResultado).order_by(desc(SimulacroResultado.fecha)).limit(limite).all()
+            return [
+                {
+                    "id": sm.id,
+                    "fecha": sm.fecha.strftime("%d/%m/%Y %H:%M"),
+                    "puntaje_global": sm.puntaje_global,
+                    "nivel_desempeno": sm.nivel_desempeno,
+                    "aciertos": sm.aciertos,
+                    "total": sm.total_preguntas,
+                    "tiempo_minutos": round(sm.tiempo_empleado_segundos / 60, 1),
+                    "diagnostico": sm.diagnostico_texto,
+                }
+                for sm in sims
+            ]
+

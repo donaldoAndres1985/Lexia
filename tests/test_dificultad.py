@@ -48,3 +48,4 @@ def test_subir_nivel_tras_3_exitos():
         assert nuevo_nivel == 2
         assert "subiste al Nivel 2" in msg
         assert repo.obtener_nivel_actual() == 2
+        repo.cerrar()
