@@ -1,0 +1,312 @@
+[
+  {
+    "id": "lit_01",
+    "titulo": "El renacuajo paseador",
+    "tipo_texto": "literario",
+    "subtipo": "poema_narrativo",
+    "nivel": 1,
+    "fuente": "Rafael Pombo (Dominio público)",
+    "texto": "El hijo de rana, Rinrín renacuajo,\nsalió esta mañana muy tieso y muy majo,\ncon pantalón corto, corbata a la moda,\nsombrero encintado y chupa de boda.\n\n—¡Muchacho, no salgas! —le grita mamá—;\npero él hace un gesto y orondo se va.\n\nHalló en el camino a un pato vecino,\ny le dijo: —¡Amigo, venga usted conmigo,\nvisitemos juntos a doña Ratona\ny habrá francachela y habrá comilona!\n\nA poco llegaron, y avanza el galán,\ny extiende la pata y toca al zaguán.\n¿Quién es? —Yo, doña Ratona, beso a usted los pies.\n—¿Está usted en casa? —Sí, señor, sí estoy,\ny celebro mucho ver a ustedes hoy;\nestaba en mi oficio, hilando algodón,\npero eso no importa, ¡bienvenidos son!\n\nSe hicieron la venia, se dieron la mano,\ny dice Ratico, que es más veterano:\n—Mi amigo el de verde rabia de calor,\ndémele cerveza, hágame el favor.\n\nY en tanto que el pillo consume la jarra,\nmandó la señora traer la guitarra\ny a renacuajito le pide que cante\nversitos alegres, tonada elegante.",
+    "preguntas": [
+      {
+        "enunciado": "¿Qué prenda llevaba Rinrín en la cabeza al salir de su casa?",
+        "opciones": ["Una gorra deportiva", "Un sombrero encintado", "Una corona dorada", "Un pañuelo de seda"],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "El texto dice textualmente: 'sombrero encintado y chupa de boda'."
+      },
+      {
+        "enunciado": "¿Cuál fue la advertencia que le hizo la mamá a Rinrín?",
+        "opciones": ["Que no gastara el dinero", "Que no saliera de casa", "Que llevara un paraguas", "Que volviera antes de cenar"],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "La madre le grita: '—¡Muchacho, no salgas!'."
+      },
+      {
+        "enunciado": "¿Qué actitud demuestra Rinrín al marcharse 'orondo' a pesar del grito de su madre?",
+        "opciones": ["Desobediencia y vanidad", "Tristeza y miedo", "Preocupación y apuro", "Generosidad y humildad"],
+        "correcta": 0,
+        "nivel": "inferencial",
+        "explicacion": "Hacer un gesto e irse orondo a pesar del mandato materno refleja desobediencia y orgullo vanidoso."
+      },
+      {
+        "enunciado": "A partir de la invitación a doña Ratona, ¿qué buscaba principalmente Rinrín?",
+        "opciones": ["Aprender a hilar algodón", "Divertirse en fiesta y comer sin trabajar", "Comprar ropa nueva para una boda", "Ayudar a su amigo el pato"],
+        "correcta": 1,
+        "nivel": "inferencial",
+        "explicacion": "Rinrín dice: 'visitemos juntos a doña Ratona y habrá francachela y habrá comilona'."
+      },
+      {
+        "enunciado": "¿Cuál es la intención educativa del autor Rafael Pombo al retratar a Rinrín de esta manera?",
+        "opciones": [
+            "Aconsejar a los jóvenes gastar su dinero en ropa fina.",
+            "Mostrar las consecuencias negativas de la imprudencia y la desobediencia a los padres.",
+            "Enseñar técnicas de tejido de algodón a los lectores.",
+            "Demostrar que los renacuajos viven mejor fuera del agua."
+        ],
+        "correcta": 1,
+        "nivel": "critico",
+        "explicacion": "La fábula utiliza el personaje desobediente para advertir a los niños sobre los peligros de ignorar los consejos familiares."
+      }
+    ]
+  },
+  {
+    "id": "lit_02",
+    "titulo": "La zorra y las uvas",
+    "tipo_texto": "literario",
+    "subtipo": "fabula",
+    "nivel": 1,
+    "fuente": "Esopo (Dominio público)",
+    "texto": "Había una vez una zorra que caminaba hambrienta por el bosque. El calor del mediodía apretaba y su garganta estaba reseca. De pronto, al cruzar un sendero, divisó una hermosa parra de la cual colgaban gruesos y relucientes racimos de uvas maduras.\n\n—¡Qué delicia! —exclamó relamiéndose—. Con esas uvas calmaré mi hambre y apagaré mi sed.\n\nLas uvas, sin embargo, colgaban de lo alto de una pérgola de madera. La zorra tomó impulso, dio un gran salto con las patas estiradas, pero se quedó corta por varios centímetros. Retrocedió unos pasos, respiró hondo, corrió con más fuerza y volvió a saltar. Nuevamente sus fauces quedaron vacías.\n\nDurante casi media hora, la zorra intentó alcanzar las uvas de todas las formas posibles: trepando por el tronco rugoso, saltando desde una roca cercana y brincando hasta quedar exhausta. Con el cuerpo empapado de sudor y las patas adoloridas, miró por última vez hacia lo alto con desprecio.\n\n—¡Bah! —dijo en voz alta para consolarse—. Después de todo, esas uvas todavía están muy verdes y agrias. No me gustan los frutos ácidos; me harían daño en el estómago.\n\nY dándose la vuelta con fingida indiferencia, se alejó con el estómago rugiendo.",
+    "preguntas": [
+      {
+        "enunciado": "¿De dónde colgaban los racimos de uvas que vio la zorra?",
+        "opciones": ["De un árbol de manzanas", "De una pérgola de madera", "De un arbusto espinoso", "De una canasta en el suelo"],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "El texto menciona textualmente: 'Las uvas, sin embargo, colgaban de lo alto de una pérgola de madera'."
+      },
+      {
+        "enunciado": "¿Por qué la zorra no pudo comerse las uvas?",
+        "opciones": ["Porque el dueño del viñedo la espantó", "Porque estaban demasiado altas para sus saltos", "Porque otro animal se las comió antes", "Porque un perro guardián las cuidaba"],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "A pesar de saltar y trepar, las uvas colgaban muy alto y no logró alcanzarlas."
+      },
+      {
+        "enunciado": "¿Por qué la zorra afirmó que las uvas estaban verdes y ácidas?",
+        "opciones": [
+            "Porque las probó y le supieron amargas",
+            "Para disimular su fracaso y no admitir su impotencia",
+            "Porque un pájaro le dijo que no estaban maduras",
+            "Porque realmente prefería cazar ratones"
+        ],
+        "correcta": 1,
+        "nivel": "inferencial",
+        "explicacion": "El texto dice 'para consolarse'. Desprecia lo que no pudo alcanzar para proteger su orgullo."
+      },
+      {
+        "enunciado": "La expresión 'se alejó con fingida indiferencia' significa que la zorra:",
+        "opciones": [
+            "Estaba contenta por no haberse comido las uvas",
+            "Aparentaba calma aunque por dentro sentía frustración y apetito",
+            "No recordaba el camino de regreso al bosque",
+            "Iba corriendo porque tenía prisa"
+        ],
+        "correcta": 1,
+        "nivel": "inferencial",
+        "explicacion": "Fingir indiferencia es actuar como si algo no importara cuando en realidad sí afecta."
+      },
+      {
+        "enunciado": "¿Qué defecto humano critica Esopo mediante la actitud de la zorra?",
+        "opciones": [
+            "La falta de apetito en animales silvestres",
+            "La costumbre de despreciar lo que no se puede conseguir por incapacidad propia",
+            "El peligro de sembrar parras en lugares altos",
+            "La pereza de quienes no caminan por el bosque"
+        ],
+        "correcta": 1,
+        "nivel": "critico",
+        "explicacion": "La moraleja clásica enseña que algunas personas desprecian con falsas excusas lo que no logran alcanzar."
+      }
+    ]
+  },
+  {
+    "id": "lit_03",
+    "titulo": "La leyenda del dorado y la laguna de Guatavita",
+    "tipo_texto": "literario",
+    "subtipo": "leyenda_colombiana",
+    "nivel": 2,
+    "fuente": "Tradición oral Muisca / Crónicas coloniales",
+    "texto": "En el altiplano cundiboyacense, en el centro de Colombia, el pueblo Muisca celebraba una de las ceremonias más sagradas de su cosmovisión. Cuando un nuevo Zipa o cacique asumía el liderazgo de la comunidad, todo el pueblo peregrinaba en procesión hacia la mística laguna circular de Guatavita, oculta entre las montañas andinas.\n\nEl futuro cacique era despojado de sus vestiduras ordinarias y su cuerpo era untado con resinas pegajosas. Sobre esa resina, los sacerdotes soplaba polvo de oro puro hasta cubrirlo por completo, transformándolo en un hombre reluciente como el mismísimo sol, a quien llamaban el 'Hombre Dorado'.\n\nEl cacique subía a una balsa ceremonial hecha de juncos trenzados, acompañado por cuatro jeques o sacerdotes principales. La balsa navegaba lentamente hacia el centro exacto de la laguna verde esmeralda. Al llegar al medio, mientras en la orilla la multitud tocaba caracoles, flautas y tambores, el Zipa arrojaba al agua ofrendas preciosas: figurillas de oro llamadas 'tunjos', collares de esmeraldas y piedras talladas. Finalmente, él mismo se sumergía en las aguas frías para lavar el polvo dorado de su piel, entregando todo su tributo a los dioses de la naturaleza.\n\nCuando los conquistadores europeos escucharon sobre el cacique cubierto de oro, imaginaron una ciudad entera hecha de riquezas inagotables y la llamaron 'El Dorado'. Esa codicia motivó expediciones interminables que nunca encontraron la ciudad imaginada, pues no comprendieron que para los muiscas el oro no representaba dinero, sino un puente sagrado con la madre tierra.",
+    "preguntas": [
+      {
+        "enunciado": "¿Cómo transformaban los sacerdotes al cacique en el 'Hombre Dorado'?",
+        "opciones": [
+            "Pintándolo con barro amarillo de la montaña",
+            "Untándolo con resinas pegajosas y soplando polvo de oro puro sobre su piel",
+            "Vistiéndolo con una armadura de oro macizo",
+            "Bañándolo en agua tibia mezclada con miel de abejas"
+        ],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "El texto explica que el cacique era untado con resinas y luego los sacerdotes soplaba polvo de oro sobre él."
+      },
+      {
+        "enunciado": "¿Qué objetos arrojaba el Zipa al centro de la laguna como ofrenda?",
+        "opciones": [
+            "Monedas de plata y armas de fuego",
+            "Tunjos de oro, esmeraldas y piedras talladas",
+            "Comida, maíz y vasijas de barro",
+            "Pieles de jaguar y plumas de águila"
+        ],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "Se menciona expresamente que arrojaba figurillas de oro llamadas tunjos, collares de esmeraldas y piedras talladas."
+      },
+      {
+        "enunciado": "A partir de la lectura, ¿qué malentendido tuvieron los conquistadores europeos?",
+        "opciones": [
+            "Creyeron que los muiscas no sabían nadar en lagunas",
+            "Confundieron un ritual espiritual indígena con la existencia de una fabulosa ciudad de riquezas materiales",
+            "Pensaron que la laguna de Guatavita estaba en la costa Caribe",
+            "Creyeron que los sacerdotes muiscas eran gigantes"
+        ],
+        "correcta": 1,
+        "nivel": "inferencial",
+        "explicacion": "Los europeos imaginaron una ciudad de oro ('El Dorado') motivados por la codicia, desconociendo el significado sagrado del ritual."
+      },
+      {
+        "enunciado": "¿Qué simbolizaba el oro para la cultura Muisca según el último párrafo?",
+        "opciones": [
+            "Moneda de cambio comercial para comprar esclavos",
+            "Un elemento sagrado y tributo espiritual conectado con la naturaleza",
+            "Un material sin ningún valor que arrojaban para deshacerse de él",
+            "Un mineral exclusivo de uso médico"
+        ],
+        "correcta": 1,
+        "nivel": "inferencial",
+        "explicacion": "El texto afirma que para los muiscas el oro no representaba dinero, sino un puente sagrado con la madre tierra."
+      },
+      {
+        "enunciado": "¿Cuál de los siguientes enunciados expresa un juicio crítico sobre la codicia colonial?",
+        "opciones": [
+            "La laguna de Guatavita tiene forma circular y se ubica entre montañas.",
+            "La ambición ciega por el oro material impidió a los europeos valorar la rica espiritualidad de las culturas indígenas.",
+            "Los sacerdotes muiscas utilizaban balsa de juncos trenzados.",
+            "El pueblo tocaba caracoles y flautas desde la orilla."
+        ],
+        "correcta": 1,
+        "nivel": "critico",
+        "explicacion": "Este enunciado reflexiona críticamente sobre el choque cultural y el impacto de la ambición frente al valor espiritual indígena."
+      }
+    ]
+  },
+  {
+    "id": "lit_04",
+    "titulo": "El ruiseñor y la rosa",
+    "tipo_texto": "literario",
+    "subtipo": "cuento_clasico",
+    "nivel": 3,
+    "fuente": "Oscar Wilde (Adaptación pedagógica)",
+    "texto": "En un jardín florecido, un joven estudiante suspiraba con tristeza: 'Ella me prometió que bailaría conmigo en el baile del príncipe si le llevaba una rosa roja; pero en todo mi jardín no hay ni una sola rosa roja'. Sus ojos se llenaron de lágrimas porque su felicidad dependía de una flor que no podía encontrar.\n\nDesde su nido en una encina, un pequeño ruiseñor lo escuchaba. El pájaro admiraba el amor sincero y pensó: 'He aquí al verdadero enamorado. Canto sobre el amor todas las noches y hoy por fin veo a alguien que sufre por él'. Conmovido, el ruiseñor voló por el jardín buscando un rosal que pudiera darle la flor deseada.\n\nPreguntó al rosal blanco junto al reloj de sol, pero este solo tenía flores blancas como la espuma del mar. Preguntó al rosal amarillo que crecía junto al estanque, pero sus rosas eran amarillas como el cabello de las sirenas. Finalmente llegó al rosal que crecía bajo la ventana del estudiante. 'Mis rosas son rojas —le dijo el rosal—, pero el invierno ha congelado mis venas y la escarcha ha marchitado mis brotes. No tendré rosas este año, a menos que cantes con tu pecho apoyado contra una de mis espinas durante toda la noche, tiñendo una flor blanca con la sangre viva de tu corazón'.\n\nEl ruiseñor meditó. La vida era dulce, disfrutar del sol y del aire del bosque era hermoso; sin embargo, consideró que el amor verdadero superaba a la propia existencia. Esa noche, cantando a la luz de la luna, entregó su vida para que floreciera la rosa más encendida y perfecta que el mundo hubiera visto.\n\nA la mañana siguiente, el estudiante abrió su ventana y gritó maravillado: '¡Qué suerte tan extraordinaria! ¡Una rosa roja perfecta!'. La cortó con brusquedad y corrió a casa de la joven. Pero la muchacha, al verla, frunció el ceño: 'Temo que no combina con mi vestido; además, el sobrino del chambelán me ha enviado joyas de verdad, y todo el mundo sabe que las joyas cuestan más que las flores'. Indignado, el joven arrojó la rosa al fango de la calle, donde una rueda de carreta la aplastó, y regresó a su habitación a leer libros de lógica.",
+    "preguntas": [
+      {
+        "enunciado": "¿Qué condición puso la muchacha para bailar con el estudiante?",
+        "opciones": ["Que le compusiera una canción", "Que le llevara una rosa roja", "Que le regalara un collar de esmeraldas", "Que aprobara todos sus exámenes de lógica"],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "El primer párrafo dice claramente: 'Ella me prometió que bailaría conmigo si le llevaba una rosa roja'."
+      },
+      {
+        "enunciado": "¿Qué sacrificio hizo el ruiseñor para conseguir la rosa?",
+        "opciones": [
+            "Voló cientos de kilómetros hasta una selva lejana",
+            "Cantó toda la noche apoyando su pecho contra una espina hasta morir",
+            "Trabajó limpiando el jardín durante tres meses",
+            "Le pidió dinero prestado al príncipe del palacio"
+        ],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "El rosal le exigió clavar su pecho en una espina cantando toda la noche, tiñendo la flor con la sangre de su corazón."
+      },
+      {
+        "enunciado": "¿Por qué la muchacha rechazó finalmente la rosa roja que le llevó el estudiante?",
+        "opciones": [
+            "Porque tenía espinas filosas que le lastimaban las manos",
+            "Porque prefería las joyas costosas que le obsequió otra persona más adinerada",
+            "Porque la rosa ya estaba marchita cuando llegó",
+            "Porque sus padres le prohibieron ir a la fiesta"
+        ],
+        "correcta": 1,
+        "nivel": "inferencial",
+        "explicacion": "La joven valoró el dinero material sobre los sentimientos, diciendo que las joyas cuestan más que las flores."
+      },
+      {
+        "enunciado": "¿Qué ironía trágica encierra el final del cuento?",
+        "opciones": [
+            "El ruiseñor sobrevivió pero perdió su hermosa voz",
+            "El inmenso sacrificio del ruiseñor fue completamente en vano frente a la superficialidad del estudiante y de la joven",
+            "El estudiante se convirtió en un gran poeta famoso",
+            "El rosal se secó para siempre por culpa de la nieve"
+        ],
+        "correcta": 1,
+        "nivel": "inferencial",
+        "explicacion": "El ruiseñor dio su vida por un ideal de amor puro que ninguno de los dos jóvenes supo valorar, terminando la flor aplastada en el fango."
+      },
+      {
+        "enunciado": "¿Qué postura crítica plantea el autor respecto a las relaciones basadas en el interés material?",
+        "opciones": [
+            "Que las joyas siempre son el mejor regalo para cualquier ocasión",
+            "Que el materialismo vuelve a las personas frías e incapaces de apreciar la generosidad y la belleza auténtica",
+            "Que los estudiantes deberían dedicarse a trabajar en lugar de estudiar lógica",
+            "Que los pájaros no deberían entrometerse en asuntos de personas"
+        ],
+        "correcta": 1,
+        "nivel": "critico",
+        "explicacion": "Wilde critica la frivolidad y el utilitarismo de una sociedad que desprecia el valor del sacrificio desinteresado."
+      }
+    ]
+  },
+  {
+    "id": "lit_05",
+    "titulo": "En las nieves del Ruiz",
+    "tipo_texto": "literario",
+    "subtipo": "fragmento_narrativo",
+    "nivel": 3,
+    "fuente": "Relatos de montaña colombiana",
+    "texto": "El aire en el páramo cortaba como navaja de hielo. Mateo y su abuelo caminaban despacio sobre el sendero de ceniza volcánica y pajonales dorados, a más de cuatro mil metros sobre el nivel del mar. A lo lejos, coronado por nubes espesas y vapores de azufre, se alzaba el imponente Volcán Nevado del Ruiz.\n\n—Mira bien esa cumbre, muchacho —dijo el anciano, apoyándose en su bastón de madera de encenillo—. Cuando yo tenía tu edad, el glaciar bajaba casi doscientos metros más abajo de donde lo ves ahora. Parecía una inmensa capa de merengue blanco que cubría toda la roca oscura.\n\nMateo miró con atención. Grandes parches grises de piedra desnuda asomaban como cicatrices en el manto blanco. Un frailejón centenario, con sus hojas aterciopeladas cubiertas de rocío helado, parecía vigilar su paso en el silencio sobrecogedor de la cordillera.\n\n—¿Y a dónde se va el hielo, abuelo? —preguntó Mateo, acomodándose la bufanda de lana.\n\n—El hielo se vuelve agua viva para los valles —respondió el abuelo con voz suave—. Baja por los ríos Chinchiná, Gualí y Lagunilla, baña los cafetales, riega el arroz del Tolima y da de beber a miles de familias. Pero si la montaña se calienta demasiado y el glaciar desaparece, los ríos bajarán secos en los veranos. La montaña no llora por ella, hijo; avisa lo que le espera a la llanura si no cuidamos el clima.",
+    "preguntas": [
+      {
+        "enunciado": "¿A qué altitud aproximada caminaban Mateo y su abuelo según el texto?",
+        "opciones": ["A dos mil metros", "A más de cuatro mil metros", "Al nivel del mar", "A quinientos metros"],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "El texto dice expresamente: 'a más de cuatro mil metros sobre el nivel del mar'."
+      },
+      {
+        "enunciado": "¿Qué comparación hace el abuelo para describir el glaciar de su juventud?",
+        "opciones": ["Una pared de cristal transparente", "Una inmensa capa de merengue blanco", "Un lago congelado de plata", "Una nube que cayó a la tierra"],
+        "correcta": 1,
+        "nivel": "literal",
+        "explicacion": "El abuelo recuerda: 'Parecía una inmensa capa de merengue blanco que cubría toda la roca oscura'."
+      },
+      {
+        "enunciado": "¿Por qué las piedras desnudas del nevado son descritas como 'cicatrices'?",
+        "opciones": [
+            "Porque fueron cortadas por mineros con maquinaria pesada",
+            "Porque representan el daño visible y el retroceso del hielo debido al calentamiento",
+            "Porque el volcán arrojó cuchillos de piedra durante una erupción",
+            "Porque los caminos fueron trazados por los montañistas"
+        ],
+        "correcta": 1,
+        "nivel": "inferencial",
+        "explicacion": "La metáfora de la cicatriz denota una herida o pérdida: la roca que antes tenía hielo ahora está expuesta por el derretimiento."
+      },
+      {
+        "enunciado": "A partir de la explicación del abuelo, ¿qué consecuencia directa traería la desaparición total del glaciar?",
+        "opciones": [
+            "Los cafetales crecerían más rápido",
+            "Escasez crítica de agua en los ríos durante temporadas secas para cultivos y poblaciones",
+            "El páramo se llenaría de turistas y hoteles",
+            "El volcán dejaría de emitir vapores de azufre"
+        ],
+        "correcta": 1,
+        "nivel": "inferencial",
+        "explicacion": "El texto señala que si el glaciar desaparece, 'los ríos bajarán secos en los veranos' afectando el agua de miles de familias."
+      },
+      {
+        "enunciado": "¿Cuál es la función pedagógica y reflexiva de la frase final del abuelo?",
+        "opciones": [
+            "Asustar al niño para que nunca vuelva a subir a las montañas",
+            "Conectar la salud de los ecosistemas de alta montaña con el bienestar y supervivencia de las personas en las ciudades",
+            "Explicar la composición química del azufre volcánico",
+            "Criticar a los campesinos que cultivan arroz en el Tolima"
+        ],
+        "correcta": 1,
+        "nivel": "critico",
+        "explicacion": "La frase resalta la interdependencia ecológica: lo que ocurre en los nevados determina la vida de las poblaciones de las tierras bajas."
+      }
+    ]
+  }
+]
